@@ -1,16 +1,21 @@
 package db
 
 import (
-	"database/sql"
 	"log"
 	"os"
+
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
-func CreateConnection() sql.DB {
+var DB *gorm.DB
+
+func CreateConnection() {
 	connStr := os.Getenv("DATABASE_URL")
-	db, err := sql.Open("postgres", connStr)
+	var err error
+	DB, err = gorm.Open(postgres.Open(connStr), &gorm.Config{})
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error opening database: %v", err)
 	}
-	return *db
+	log.Println("Database connection established")
 }

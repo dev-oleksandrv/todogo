@@ -7,4 +7,5 @@ func RegisterTaskRoutes(router *mux.Router, taskController *TaskController) {
 
 	taskRouter.HandleFunc("/", taskController.GetTasks).Methods("GET")
 	taskRouter.HandleFunc("/", taskController.CreateTask).Methods("POST")
+	taskRouter.HandleFunc("/{id:[0-9]+}", taskController.DeleteTask).Methods("DELETE")
 }

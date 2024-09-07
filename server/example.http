@@ -1,10 +1,12 @@
 GET http://localhost:8080/api/tasks/
 Content-Type: application/json
 ###
-POST http://localhost:8080/api/tasks/ HTTP/1.1
+POST http://localhost:8080/api/tasks/ 
 content-type: application/json
 
 {
     "content": "foobar",
-    "is_completed": false
+    "description": "testing"
 }
+###
+DELETE http://localhost:8080/api/tasks/1
