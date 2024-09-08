@@ -1,0 +1,7 @@
+ALTER TABLE
+    lists DROP CONSTRAINT IF EXISTS fk_space;
+
+ALTER TABLE
+    lists DROP COLUMN IF EXISTS space_id;
+
+DROP TABLE IF EXISTS spaces;

@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/dev-oleksandrv/api/list"
+	"github.com/dev-oleksandrv/api/space"
 	"github.com/dev-oleksandrv/api/tasks"
 	"github.com/dev-oleksandrv/config"
 	"github.com/dev-oleksandrv/db"
@@ -20,6 +21,11 @@ func main() {
 	db.CreateConnection()
 	// Creating a router
 	r := mux.NewRouter()
+	// Space Controller
+	spaceRepository := repository.NewGORMSpaceRepository(db.DB) 
+	spaceService := space.NewSpaceService(*spaceRepository)
+	spaceController := space.NewSpaceController(spaceService)
+	space.RegisterSpaceRoutes(r, spaceController)
 	// List Controller
 	listRepository := repository.NewGORMListRepository(db.DB)
 	listService := list.NewListService(*listRepository)

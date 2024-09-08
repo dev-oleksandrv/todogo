@@ -19,6 +19,16 @@ type List struct {
     Title 		string  	`gorm:"size:255;not null"` 
     Emoji 		*string 	`gorm:"size:10"`                  
     Tasks 		[]Task  	`gorm:"foreignKey:ListID"`    
+	SpaceID     int       	`gorm:"not null"`                 
+    Space       Space      	`gorm:"constraint:OnDelete:CASCADE;" json:"-"` 
+	CreatedAt   time.Time	`gorm:"autoCreateTime"`
+	UpdatedAt 	time.Time	`gorm:"autoUpdateTime"`
+}
+
+type Space struct {
+	ID    		int     	`gorm:"primaryKey;autoIncrement"`
+	Title 		string  	`gorm:"size:255;not null"`       
+    Lists 		[]List  	`gorm:"foreignKey:SpaceID"`  
 	CreatedAt   time.Time	`gorm:"autoCreateTime"`
 	UpdatedAt 	time.Time	`gorm:"autoUpdateTime"`
 }
