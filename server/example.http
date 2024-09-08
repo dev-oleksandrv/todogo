@@ -1,3 +1,15 @@
+GET http://localhost:8080/api/list/
+Content-Type: application/json
+###
+POST http://localhost:8080/api/list/
+Content-Type: application/json
+
+{
+    "title": "Personal List"
+}
+###
+DELETE http://localhost:8080/api/list/3
+###
 GET http://localhost:8080/api/tasks/
 Content-Type: application/json
 ###
@@ -5,8 +17,9 @@ POST http://localhost:8080/api/tasks/
 content-type: application/json
 
 {
-    "content": "foobar",
+    "listId": 3,
+    "content": "test",
     "description": "testing"
 }
 ###
-DELETE http://localhost:8080/api/tasks/1
+DELETE http://localhost:8080/api/tasks/3

@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/dev-oleksandrv/api/list"
 	"github.com/dev-oleksandrv/api/tasks"
 	"github.com/dev-oleksandrv/config"
 	"github.com/dev-oleksandrv/db"
@@ -19,11 +20,21 @@ func main() {
 	db.CreateConnection()
 	// Creating a router
 	r := mux.NewRouter()
+	// List Controller
+	listRepository := repository.NewGORMListRepository(db.DB)
+	listService := list.NewListService(*listRepository)
+	listController := list.NewListController(listService)
+	list.RegisterListRoutes(r, listController)
 	// Tasks Controller
 	taskRepository := repository.NewGORMTaskRepository(db.DB)
 	taskService := tasks.NewTaskService(*taskRepository)
 	taskController := tasks.NewTaskController(taskService)
 	tasks.RegisterTaskRoutes(r, taskController)
+	// Closing DB after program exit
+	sqlDb, err := db.DB.DB()
+	if err == nil {
+		defer sqlDb.Close()
+	}
 	// Run HTTP server
 	log.Println("Running server on :8080")
 	log.Fatal(http.ListenAndServe(":8080", r))
