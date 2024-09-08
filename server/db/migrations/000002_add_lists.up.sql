@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS lists (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    emoji VARCHAR(10) NULL
+);
+
+ALTER TABLE
+    tasks
+ADD
+    COLUMN list_id INTEGER;
+
+ALTER TABLE
+    tasks
+ADD
+    CONSTRAINT fk_list FOREIGN KEY (list_id) REFERENCES lists(id) ON UPDATE CASCADE ON DELETE
+SET
+    NULL;

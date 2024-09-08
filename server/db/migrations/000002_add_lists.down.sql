@@ -1,0 +1,7 @@
+ALTER TABLE
+    tasks DROP CONSTRAINT IF EXISTS fk_list;
+
+ALTER TABLE
+    tasks DROP COLUMN IF EXISTS list_id;
+
+DROP TABLE IF EXISTS lists;
