@@ -13,18 +13,20 @@ DELETE http://localhost:8080/api/list/4
 ###
 GET http://localhost:8080/api/space/
 Content-Type: application/json
-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoidGVzdDJAZW1haWwuY29tIiwiZXhwIjoxNzI1OTE1MzQyfQ.jSdGj2m9H09hsI7J3tIVlSAwbZ8FCMfrECIPa4Q5wzw
+Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoidGVzdDJAZW1haWwuY29tIiwiZXhwIjoxNzI1OTE3ODk3fQ.MR5_R-u1xmOHN4hDz2yupIcWYIt9UmRv8YGUXDGc_9Q
 
 ###
 POST http://localhost:8080/api/space/
 Content-Type: application/json
-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImVtYWlsIjoidGVzdDNAZW1haWwuY29tIiwiZXhwIjoxNzI1OTE1MzA2fQ.jjHDKDiCv3EmGA4XFvXa4oPfYEcVhHQI_UtXKaF9VPk
+Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoidGVzdDJAZW1haWwuY29tIiwiZXhwIjoxNzI1OTE3ODk3fQ.MR5_R-u1xmOHN4hDz2yupIcWYIt9UmRv8YGUXDGc_9Q
 
 {
     "title": "Personal Space"
 }
 ###
-DELETE http://localhost:8080/api/space/1
+DELETE http://localhost:8080/api/space/5
+Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoidGVzdDJAZW1haWwuY29tIiwiZXhwIjoxNzI1OTE3ODk3fQ.MR5_R-u1xmOHN4hDz2yupIcWYIt9UmRv8YGUXDGc_9Q
+
 ###
 GET http://localhost:8080/api/tasks/
 Content-Type: application/json

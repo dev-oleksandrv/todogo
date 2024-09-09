@@ -6,7 +6,7 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/dev-oleksandrv/config"
+	"github.com/dev-oleksandrv/internal/config"
 )
 
 func main() {

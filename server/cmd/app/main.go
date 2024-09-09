@@ -8,8 +8,8 @@ import (
 	"github.com/dev-oleksandrv/api/list"
 	"github.com/dev-oleksandrv/api/space"
 	"github.com/dev-oleksandrv/api/tasks"
-	"github.com/dev-oleksandrv/config"
 	"github.com/dev-oleksandrv/db"
+	"github.com/dev-oleksandrv/internal/config"
 	"github.com/dev-oleksandrv/repository"
 	"github.com/gorilla/mux"
 )

@@ -70,7 +70,8 @@ func (c *SpaceController) DeleteSpace(w http.ResponseWriter, r *http.Request) {
 		)
 		return
 	}
-	if err := c.spaceService.DeleteSpace(uint(id)); err != nil {
+	userID := r.Context().Value(auth.GetUserIDContextKey()).(int)
+	if err := c.spaceService.DeleteSpace(userID, int(id)); err != nil {
 		response.JSON(
 			w, 
 			http.StatusInternalServerError, 

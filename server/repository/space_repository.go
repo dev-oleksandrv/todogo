@@ -39,20 +39,27 @@ func (r *GORMSpaceRepository) GetAllByUserID(userID int) ([]db.Space, error) {
 	return user.Spaces, nil
 }
 
-func (r *GORMSpaceRepository) Delete(id uint) error {
+func (r *GORMSpaceRepository) Delete(id int) error {
 	var space db.Space
-	if err := r.db.Find(&space, id).Error; err != nil {
-		if err == gorm.ErrRecordNotFound {
-			log.Printf("Space with ID %d not found", id)
-			return err
-		}
-		log.Printf("Error fetching space: %v", err)
+	if err := r.db.First(&space, id).Error; err != nil {
 		return err
 	}
+
 	if err := r.db.Delete(&space).Error; err != nil {
-		log.Printf("Error deleting space with ID %d: %v", id, err)
 		return err
 	}
-	log.Printf("Space with ID %d deleted successfully", id)
+
 	return nil
+}
+
+func (r *GORMSpaceRepository) IsUserAssociatedWithSpace(userID, spaceID int) (bool, error) {
+	var count int64
+	err := r.db.Model(&db.Space{}).Where("id = ?", spaceID).
+		Joins("JOIN user_spaces ON spaces.id = user_spaces.space_id").
+		Where("user_spaces.user_id = ?", userID).
+		Count(&count).Error
+	if err != nil {
+		return false, err
+	}
+	return count > 0, nil
 }
