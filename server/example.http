@@ -13,9 +13,12 @@ DELETE http://localhost:8080/api/list/4
 ###
 GET http://localhost:8080/api/space/
 Content-Type: application/json
+Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoidGVzdDJAZW1haWwuY29tIiwiZXhwIjoxNzI1OTE1MzQyfQ.jSdGj2m9H09hsI7J3tIVlSAwbZ8FCMfrECIPa4Q5wzw
+
 ###
 POST http://localhost:8080/api/space/
 Content-Type: application/json
+Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImVtYWlsIjoidGVzdDNAZW1haWwuY29tIiwiZXhwIjoxNzI1OTE1MzA2fQ.jjHDKDiCv3EmGA4XFvXa4oPfYEcVhHQI_UtXKaF9VPk
 
 {
     "title": "Personal Space"
@@ -36,3 +39,19 @@ content-type: application/json
 }
 ###
 DELETE http://localhost:8080/api/tasks/3
+###
+POST http://localhost:8080/api/auth/register
+content-type: application/json
+
+{
+    "email": "test3@email.com",
+    "password": "qq11QQ"
+}
+###
+POST http://localhost:8080/api/auth/login
+content-type: application/json
+
+{
+    "email": "test2@email.com",
+    "password": "qq11QQ"
+}

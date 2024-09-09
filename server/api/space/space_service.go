@@ -13,12 +13,12 @@ func NewSpaceService(spaceRepo repository.GORMSpaceRepository) *SpaceService {
 	return &SpaceService{ spaceRepo }
 }
 
-func (s *SpaceService) CreateSpace(space db.Space) (db.Space, error) {
-	return s.spaceRepo.Create(space)
+func (s *SpaceService) CreateSpace(userID int, space db.Space) (db.Space, error) {
+	return s.spaceRepo.Create(userID, space)
 }
 
-func (s *SpaceService) GetAllSpaces() ([]db.Space, error) {
-	return s.spaceRepo.GetAll()
+func (s *SpaceService) GetAllSpacesByUserID(userID int) ([]db.Space, error) {
+	return s.spaceRepo.GetAllByUserID(userID) 
 }
 
 func (s *SpaceService) DeleteSpace(id uint) error {

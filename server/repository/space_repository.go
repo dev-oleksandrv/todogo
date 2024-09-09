@@ -15,23 +15,28 @@ func NewGORMSpaceRepository(db *gorm.DB) *GORMSpaceRepository {
 	return &GORMSpaceRepository{db}
 }
 
-func (r *GORMSpaceRepository) Create(space db.Space) (db.Space, error) {
+func (r *GORMSpaceRepository) Create(userID int,space db.Space) (db.Space, error) {
+	var user db.User
 	result := r.db.Create(&space)
 	if result.Error != nil {
 		log.Printf("Error creating space: %v", result.Error)
 		return space, result.Error
 	}
+	if err := r.db.First(&user, userID).Association("Spaces").Append(&space); err != nil {
+		log.Printf("Error connection space to user: %v", err)
+		return space, err
+	}
 	return space, nil
 }
 
-func (r *GORMSpaceRepository) GetAll() ([]db.Space, error) {
+func (r *GORMSpaceRepository) GetAllByUserID(userID int) ([]db.Space, error) {
 	var spaces []db.Space
-	result := r.db.Find(&spaces)
-	if result.Error != nil {
-		log.Printf("Error creating space: %v", result.Error)
-		return nil, result.Error
+	var user db.User
+	if err := r.db.Preload("Spaces").First(&user, userID).Error; err != nil {
+		log.Printf("Error while preloading spaces: %v", err)
+		return spaces, err
 	}
-	return spaces, nil
+	return user.Spaces, nil
 }
 
 func (r *GORMSpaceRepository) Delete(id uint) error {

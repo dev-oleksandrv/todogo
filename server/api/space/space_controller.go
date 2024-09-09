@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/dev-oleksandrv/api/auth"
 	"github.com/dev-oleksandrv/db"
 	"github.com/dev-oleksandrv/internal/response"
 	"github.com/gorilla/mux"
@@ -30,7 +31,8 @@ func (c *SpaceController) CreateSpace(w http.ResponseWriter, r *http.Request) {
 		)
 		return
 	}
-	space, err := c.spaceService.CreateSpace(space)
+	userID := r.Context().Value(auth.GetUserIDContextKey()).(int)
+	space, err := c.spaceService.CreateSpace(userID, space)
 	if err != nil {
 		response.JSON(
 			w, 
@@ -43,7 +45,8 @@ func (c *SpaceController) CreateSpace(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *SpaceController) GetSpaces(w http.ResponseWriter, r *http.Request) {
-	spaces, err := c.spaceService.GetAllSpaces()
+	userID := r.Context().Value(auth.GetUserIDContextKey()).(int)
+	spaces, err := c.spaceService.GetAllSpacesByUserID(userID)
 	if err != nil {
 		response.JSON(
 			w, 

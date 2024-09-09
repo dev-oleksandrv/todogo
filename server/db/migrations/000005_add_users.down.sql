@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS user_spaces;
+
+DROP TABLE IF EXISTS users;

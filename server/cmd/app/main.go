@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/dev-oleksandrv/api/auth"
 	"github.com/dev-oleksandrv/api/list"
 	"github.com/dev-oleksandrv/api/space"
 	"github.com/dev-oleksandrv/api/tasks"
@@ -21,6 +22,12 @@ func main() {
 	db.CreateConnection()
 	// Creating a router
 	r := mux.NewRouter()
+	// User Repository
+	userRepository := repository.NewGORMUserRepository(db.DB)
+	// Auth Controller
+	authService := auth.NewAuthService(*userRepository)
+	authController := auth.NewAuthController(authService)
+	auth.RegisterAuthRoutes(r, authController)
 	// Space Controller
 	spaceRepository := repository.NewGORMSpaceRepository(db.DB) 
 	spaceService := space.NewSpaceService(*spaceRepository)
